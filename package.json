@@ -24,6 +24,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@koa/router": "^12.0.1",
     "@types/koa": "~2.15.0",
     "@types/koa__cors": "~5.0.0",
     "@types/koa-qs": "~2.0.3",
@@ -33,7 +34,10 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.1.1",
+    "koa-bodyparser": "^4.4.1",
+    "koa2-swagger-ui": "^5.10.0",
     "mongodb-memory-server": "^9.1.8",
+    "tsoa": "^6.3.1",
     "typescript": "^5.4.3",
     "vitest": "^1.4.0"
   }
