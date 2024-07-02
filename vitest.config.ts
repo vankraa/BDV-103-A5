@@ -11,7 +11,7 @@ export default defineConfig({
     }
   },
   test: {
-    includeSource: ['src/**/*.{js,ts}'],
+    includeSource: (process.env.VITEST_API != null) ? ['tests/**/*.spec.ts'] : ['src/**/*.{js,ts}'],
     setupFiles: ['./database_test_setup.ts'],
     testTimeout: 20000
   }

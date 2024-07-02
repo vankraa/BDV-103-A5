@@ -10,6 +10,7 @@
     "check-types": "tsc --noEmit",
     "test": "vitest",
     "test:ci": "vitest run",
+    "test:api": "VITEST_API=true vitest run",
     "build": "tsoa spec-and-routes && tsc"
   },
   "keywords": [],
