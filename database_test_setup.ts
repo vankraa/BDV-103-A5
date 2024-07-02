@@ -1,5 +1,5 @@
 import { MongoMemoryServer } from 'mongodb-memory-server'
-import { afterAll } from 'vitest'
+import { beforeAll, afterAll } from 'vitest'
 
 export async function setup (): Promise<void> {
   const instance = await MongoMemoryServer.create({ binary: { version: '7.0.7' } })
@@ -13,6 +13,8 @@ export async function teardown (): Promise<void> {
   await instance.stop({ doCleanup: true })
 }
 
-await setup()
+beforeAll(async () => {
+  await setup()
+})
 
 afterAll(teardown)
