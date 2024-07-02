@@ -1,23 +1,18 @@
 import { MongoMemoryServer } from 'mongodb-memory-server'
-import { beforeAll, afterAll } from 'vitest'
-
-let instance: MongoMemoryServer
+import { afterAll } from 'vitest'
 
 export async function setup (): Promise<void> {
-  instance = await MongoMemoryServer.create({ binary: { version: '7.0.7' } })
-  const uri = instance.getUri()
-  ;(global as any).__MONGOINSTANCE = instance
-  ;(global as any).MONGO_URI = uri.slice(0, uri.lastIndexOf('/'))
+  const instance = await MongoMemoryServer.create({ binary: { version: '7.0.7' } })
+  const uri = instance.getUri();
+  (global as any).__MONGOINSTANCE = instance;
+  (global as any).MONGO_URI = uri.slice(0, uri.lastIndexOf('/'))
 }
 
 export async function teardown (): Promise<void> {
-  if (instance != null) {
-    await instance.stop({ doCleanup: true })
-  }
+  const instance: MongoMemoryServer = (global as any).__MONGOINSTANCE
+  await instance.stop({ doCleanup: true })
 }
 
-beforeAll(async () => {
-  await setup()
-})
+await setup()
 
 afterAll(teardown)
