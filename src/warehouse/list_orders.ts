@@ -6,7 +6,7 @@ async function listOrders (data: WarehouseData): Promise<Array<{ orderId: OrderI
   return await data.listOrders()
 }
 
-export function listOrdersRouter (router: ZodRouter): void {
+export function listOrdersRouter (router: ZodRouter, warehouse: WarehouseData): void {
   router.register({
     name: 'list orders',
     method: 'get',

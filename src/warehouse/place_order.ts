@@ -13,7 +13,7 @@ async function placeOrder (data: WarehouseData, books: BookID[]): Promise<OrderI
   return await data.placeOrder(order)
 }
 
-export function placeOrderRouter (router: ZodRouter): void {
+export function placeOrderRouter (router: ZodRouter, warehouse: WarehouseData): void {
   router.register({
     name: 'place an order',
     method: 'post',

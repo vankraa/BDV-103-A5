@@ -17,7 +17,7 @@ async function getBookInfo (data: WarehouseData, bookId: BookID): Promise<Record
   return response
 }
 
-export function getBookInfoRouter (router: ZodRouter): void {
+export function getBookInfoRouter (router: ZodRouter, warehouse: WarehouseData): void {
   router.register({
     name: 'place books on shelf',
     method: 'get',

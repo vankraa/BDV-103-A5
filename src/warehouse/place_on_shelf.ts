@@ -11,7 +11,7 @@ async function placeBooksOnShelf (data: WarehouseData, bookId: BookID, numberOfB
   await data.placeBookOnShelf(bookId, shelf, current + numberOfBooks)
 }
 
-export function placeBooksOnShelfRouter (router: ZodRouter): void {
+export function placeBooksOnShelfRouter (router: ZodRouter, warehouse: WarehouseData): void {
   router.register({
     name: 'place books on shelf',
     method: 'put',

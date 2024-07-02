@@ -19,7 +19,7 @@ export interface BookDatabaseAccessor {
 }
 
 export interface AppBookDatabaseState {
-  bookdatabse: 
+  books: BookDatabaseAccessor
 }
 
 export function getBookDatabase (dbName?: string): BookDatabaseAccessor {

@@ -38,7 +38,7 @@ async function fulfilOrder (data: WarehouseData, orderId: OrderId, booksFulfille
   }))
 }
 
-export function fulfilOrderRouter (router: ZodRouter): void {
+export function fulfilOrderRouter (router: ZodRouter, warehouse: WarehouseData): void {
   router.register({
     name: 'fulfil order',
     method: 'put',

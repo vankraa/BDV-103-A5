@@ -5,33 +5,33 @@ import qs from 'koa-qs'
 import { koaSwagger } from 'koa2-swagger-ui'
 import { setupBookRoutes } from './src/books'
 import { setupWarehouseRoutes } from './src/warehouse'
-import { getWarehouseDatabase } from './src/warehouse/warehouse_database'
-import { getBookDatabase } from './src/database_access'
+import { type AppWarehouseDatabaseState, getDefaultWarehouseDatabase } from './src/warehouse/warehouse_database'
+import { type AppBookDatabaseState, getBookDatabase } from './src/database_access'
 import swagger from './build/swagger.json'
 import { type Server, type IncomingMessage, type ServerResponse } from 'http'
 
-export function createServer (port: number = 0, randomizeDB: boolean = false): Server<typeof IncomingMessage, typeof ServerResponse> {
-  const app = new Koa()
+export async function createServer (port: number = 0, randomizeDB: boolean = false): Promise<Server<typeof IncomingMessage, typeof ServerResponse>> {
+  const app = new Koa<AppBookDatabaseState & AppWarehouseDatabaseState, Koa.DefaultContext>()
 
   const bookDatabase = getBookDatabase(randomizeDB ? undefined : 'books')
-  const warehouseDatabase = getWarehouseDatabase(randomizeDB ? undefined : 'warehouse')
+  const warehouseDatabase = await getDefaultWarehouseDatabase(randomizeDB ? undefined : 'warehouse')
 
   const state = {
     books: bookDatabase,
     warehouse: warehouseDatabase
   }
 
-  qs(app)
-  app.use(cors())
-
   app.use(async (ctx, next) => {
     ctx.state = state
     await next()
   })
 
+  qs(app)
+  app.use(cors())
+
   const router = zodRouter({ zodRouter: { exposeRequestErrors: true } })
-  setupBookRoutes(router)
-  setupWarehouseRoutes(router)
+  setupBookRoutes(router, state.books)
+  setupWarehouseRoutes(router, state.warehouse)
   app.use(router.routes())
 
   app.use(koaSwagger({
