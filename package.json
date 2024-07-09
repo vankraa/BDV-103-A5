@@ -4,14 +4,15 @@
   "description": "This is a template repository for the first assignment in BVD 103 at McMaster Continuing Education.",
   "main": "index.ts",
   "scripts": {
-    "start-server": "tsx ./index.ts",
+    "start-server": "./generate-openapi.sh && tsx ./index.ts",
     "lint": "eslint ./**/*.ts",
     "fix-lint": "eslint --fix ./**/*.ts",
     "check-types": "tsc --noEmit",
     "test": "vitest",
     "test:ci": "vitest run",
     "test:api": "VITEST_API=true vitest run",
-    "build": "tsoa spec-and-routes && tsc"
+    "build": "tsoa spec-and-routes && tsc",
+    "gen-api": "./generate-openapi.sh"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +27,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.13.1",
     "@koa/router": "^12.0.1",
     "@types/koa": "~2.15.0",
     "@types/koa__cors": "~5.0.0",

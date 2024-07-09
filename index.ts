@@ -1,3 +1,3 @@
 import { createServer } from './server_launcher'
 
-createServer(3000)
+void createServer(3000)
