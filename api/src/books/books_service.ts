@@ -1,4 +1,4 @@
-import { type Book, type Filter } from '../../adapter/assignment-3'
+import { type Book, type Filter } from '../../../adapter/assignment-3'
 import { getBookDatabase } from '../database_access'
 import { ObjectId } from 'mongodb'
 

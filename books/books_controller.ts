@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Path, Post, Query, Route, SuccessResponse } from 'tsoa'
-import { type Book, type Filter } from '../../adapter/assignment-4'
+import { type Book, type Filter } from '../adapter/assignment-4'
 import { BooksService } from './books_service'
 
 @Route('books')
